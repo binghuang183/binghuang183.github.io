@@ -67,7 +67,7 @@
             transform: scale(1.03);
             box-shadow: 0 8px 25px rgba(255, 184, 0, 0.35);
         }
-        /* 微信按钮专用颜色 */
+        /* 微信按钮专用样式 */
         .btn-wx {
             background: linear-gradient(90deg, #07C160, #09D86C);
             box-shadow: 0 6px 20px rgba(7, 193, 96, 0.25);
@@ -78,9 +78,24 @@
             font-size: 14px;
             text-align: center;
         }
+        /* 复制成功提示 */
+        #toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 12px 24px;
+            border-radius: 8px;
+            display: none;
+            z-index: 999;
+        }
     </style>
 </head>
 <body>
+    <div id="toast">微信号已复制，打开微信添加即可</div>
+
     <h1>《一路狂飙》下载中心<br>CDK领888元新人礼包</h1>
 
     <div class="info-box">
@@ -99,11 +114,29 @@
     <button class="btn" onclick="window.open('https://yldg.ququ.im/YLDG.html','_blank')">iOS下载</button>
     <button class="btn" onclick="window.open('http://zzjt166.com/user-login.html','_blank')">超值商城</button>
 
-    <!-- 一键加微信按钮 -->
-    <button class="btn btn-wx" onclick="window.open('weixin://contacts/profile/18719246460','_blank')">
-        一键添加客服
+    <!-- 一键复制微信号按钮（全环境通用） -->
+    <button class="btn btn-wx" onclick="copyWechat()">
+        复制客服微信号
     </button>
 
-    <p class="tip">点击按钮自动跳转浏览器打开</p >
+    <p class="tip">点击按钮复制微信号，打开微信粘贴添加</p >
+
+    <script>
+        // 你的微信号
+        const WECHAT = "18719246460";
+
+        // 复制功能
+        function copyWechat() {
+            navigator.clipboard.writeText(WECHAT).then(() => {
+                const toast = document.getElementById('toast');
+                toast.style.display = 'block';
+                setTimeout(() => {
+                    toast.style.display = 'none';
+                }, 2000);
+            }).catch(err => {
+                alert("复制失败，请手动复制：" + WECHAT);
+            });
+        }
+    </script>
 </body>
 </html>
