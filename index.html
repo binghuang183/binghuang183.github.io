@@ -78,23 +78,29 @@
             font-size: 14px;
             text-align: center;
         }
-        /* 复制成功提示 */
+        /* 🔥 优化后的复制成功提示 Toast */
         #toast {
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0,0,0,0.8);
+            background: rgba(0, 0, 0, 0.95);
             color: #fff;
-            padding: 12px 24px;
-            border-radius: 8px;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            z-index: 9999; /* 最高层级，绝对不会被遮挡 */
             display: none;
-            z-index: 999;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            border: 1px solid #07C160;
         }
     </style>
 </head>
 <body>
-    <div id="toast">微信号已复制，打开微信添加即可</div>
+    <!-- 复制成功提示 -->
+    <div id="toast">✅ 微信号已复制！<br>打开微信粘贴添加即可</div>
 
     <h1>《一路狂飙》下载中心<br>CDK领888元新人礼包</h1>
 
@@ -114,7 +120,7 @@
     <button class="btn" onclick="window.open('https://yldg.ququ.im/YLDG.html','_blank')">iOS下载</button>
     <button class="btn" onclick="window.open('http://zzjt166.com/user-login.html','_blank')">超值商城</button>
 
-    <!-- 一键复制微信号按钮（全环境通用） -->
+    <!-- 复制客服微信号按钮 -->
     <button class="btn btn-wx" onclick="copyWechat()">
         复制客服微信号
     </button>
@@ -124,18 +130,44 @@
     <script>
         // 你的微信号
         const WECHAT = "18719246460";
+        const toast = document.getElementById('toast');
 
-        // 复制功能
+        // 🔥 增强版复制功能，双重兜底
         function copyWechat() {
-            navigator.clipboard.writeText(WECHAT).then(() => {
-                const toast = document.getElementById('toast');
-                toast.style.display = 'block';
-                setTimeout(() => {
-                    toast.style.display = 'none';
-                }, 2000);
-            }).catch(err => {
-                alert("复制失败，请手动复制：" + WECHAT);
-            });
+            // 方案1：现代浏览器剪贴板API
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(WECHAT)
+                .then(() => {
+                    showToast();
+                })
+                .catch(() => {
+                    // 方案2：降级方案，用临时输入框复制
+                    fallbackCopy();
+                });
+            } else {
+                // 方案2：兼容旧浏览器
+                fallbackCopy();
+            }
+        }
+
+        // 降级复制方案
+        function fallbackCopy() {
+            const input = document.createElement('input');
+            input.value = WECHAT;
+            document.body.appendChild(input);
+            input.select();
+            document.execCommand('copy');
+            document.body.removeChild(input);
+            showToast();
+        }
+
+        // 显示提示
+        function showToast() {
+            toast.style.display = 'block';
+            // 2秒后自动隐藏
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 2000);
         }
     </script>
 </body>
