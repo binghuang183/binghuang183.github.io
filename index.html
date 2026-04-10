@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <!-- 强制UTF-8编码，彻底解决乱码 -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>《一路狂飙》下载中心</title>
@@ -10,56 +9,91 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            /* 优化字体栈，避免微软雅黑缺失导致的渲染问题 */
-            font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", "Hiragino Sans GB", sans-serif;
+            font-family: "Microsoft YaHei", "微软雅黑", "PingFang SC", sans-serif;
         }
         body {
-            background: #0f3d2e;
-            color: #fff;
+            background: linear-gradient(135deg, #101018 0%, #1a1a2e 30%, #262642 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
             padding: 20px;
         }
         h1 {
             font-size: 28px;
-            margin: 20px 0;
+            color: #fff;
             text-align: center;
+            margin-bottom: 20px;
             line-height: 1.4;
+            text-shadow: 0 0 12px rgba(255, 184, 0, 0.3);
+        }
+        .info-box {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 16px;
+            padding: 20px;
+            width: 100%;
+            max-width: 400px;
+            color: #fff;
+            margin-bottom: 25px;
+            line-height: 1.8;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+        .info-box strong {
+            color: #ffb800;
+        }
+        .cdk-list {
+            margin: 6px 0;
+            letter-spacing: 1px;
         }
         .btn {
-            width: 90%;
+            width: 100%;
             max-width: 400px;
             height: 60px;
-            background: #ffb800;
+            background: linear-gradient(90deg, #ffb800, #ffd040);
             color: #000;
             font-size: 20px;
             font-weight: bold;
             border: none;
-            border-radius: 12px;
-            margin: 15px 0;
+            border-radius: 16px;
+            margin: 10px 0;
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: 0.3s;
+            box-shadow: 0 6px 20px rgba(255, 184, 0, 0.25);
         }
         .btn:hover {
-            background: #ffd040;
-            transform: scale(1.02);
+            transform: scale(1.03);
+            box-shadow: 0 8px 25px rgba(255, 184, 0.35);
         }
         .tip {
+            color: rgba(255,255,255,0.5);
+            margin-top: 20px;
             font-size: 14px;
-            color: #ccc;
-            margin-top: 30px;
             text-align: center;
         }
     </style>
 </head>
 <body>
     <h1>《一路狂飙》下载中心<br>CDK领888元新人礼包</h1>
-    <button class="btn" onclick="window.open('http://zzjt166.com/register.html?dl=79', '_blank')">注册链接</button>
-    <button class="btn" onclick="window.open('https://yldg.ququ.im/YLDG.html', '_blank')">安卓下载</button>
-    <button class="btn" onclick="window.open('https://yldg.ququ.im/YLDG.html', '_blank')">iOS下载</button>
-    <button class="btn" onclick="window.open('http://zzjt166.com/user-login.html', '_blank')">超值商城</button>
+
+    <div class="info-box">
+        <strong>兑换说明</strong><br>
+        1. 注册后在游戏内礼包兑换处输入兑换码：<br>
+        <div class="cdk-list">
+        <strong>VIP666</strong> <strong>VIP777</strong><br>
+        <strong>VIP888</strong> <strong>VIP999</strong>
+        </div>
+        2. 领取海量钻石、金币、VIP经验及限定战车<br>
+        3. 每个账号限领一次，新手专享，即时到账
+    </div>
+
+    <button class="btn" onclick="window.open('http://zzjt166.com/register.html?dl=79','_blank')">注册链接</button>
+    <button class="btn" onclick="window.open('https://yldg.ququ.im/YLDG.html','_blank')">安卓下载</button>
+    <button class="btn" onclick="window.open('https://yldg.ququ.im/YLDG.html','_blank')">iOS下载</button>
+    <button class="btn" onclick="window.open('http://zzjt166.com/user-login.html','_blank')">超值商城</button>
+
     <p class="tip">点击按钮自动跳转浏览器打开</p >
 </body>
 </html>
